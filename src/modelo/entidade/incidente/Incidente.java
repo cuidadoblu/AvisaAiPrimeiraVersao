@@ -2,7 +2,9 @@ package modelo.entidade.incidente;
 
 import java.time.LocalDateTime;
 
-public class Incidente {
+import modelo.entidade.comunidade.Comunidade;
+
+public class Incidente extends Comunidade{
 	
 	private int idIncidente;
 	private String descricao;
