@@ -15,6 +15,15 @@ public class Incidente extends Comunidade{
 	private Localidade localidade;
 	private Situacao situacao;
 	
+	public Incidente(String descricao, LocalDateTime data, Categoria categoria, Comunidade comunidade, Usuario usuario, Localidade localidade, Situacao situacao) {
+		setDescricao(descricao);
+		setData(data);
+		setCategoria(categoria);
+		setComunidade(comunidade);
+		setUsuario(usuario);
+		setLocalidade(localidade);
+		setSituacao(situacao);
+	}
 	
 	public String getDescricao() {
 		return descricao;

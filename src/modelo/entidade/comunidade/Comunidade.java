@@ -12,6 +12,11 @@ public class Comunidade  {
 	private List<Incidente> incidentes;
 	private List<Usuario> usuarios;
 	
+	public Comunidade(String nome, Localidade localidade) {
+		setNome(nome);
+		setLocalidade(localidade);
+	}
+	
 	public String getNome() {
 		return nome;
 	}
