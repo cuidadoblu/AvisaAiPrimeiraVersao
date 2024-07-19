@@ -4,17 +4,44 @@ import java.time.LocalDateTime;
 
 import modelo.entidade.comunidade.Comunidade;
 
+@Entity
+@Table(name = "incidente")
 public class Incidente extends Comunidade{
 	
+	@Id
+	@Column(name = "id_incidente")
 	private int idIncidente;
+	
+	@Column(name = "descricao_incidente")
 	private String descricao;
+	
+	@Column(name = "data_incidente")
 	private LocalDateTime data;
+	
+	@Column(name = "id_categoria")
 	private Categoria categoria;
+	
+	@Column(name = "id_comunidade")
 	private Comunidade comunidade;
+	
+	@Column(name = "id_usuario")
 	private Usuario usuario;
+	
+	@Column(name = "id_localidade")
 	private Localidade localidade;
+	
+	@Column(name = "id_situacao")
 	private Situacao situacao;
 	
+	public Incidente(String descricao, LocalDateTime data, Categoria categoria, Comunidade comunidade, Usuario usuario, Localidade localidade, Situacao situacao) {
+		setDescricao(descricao);
+		setData(data);
+		setCategoria(categoria);
+		setComunidade(comunidade);
+		setUsuario(usuario);
+		setLocalidade(localidade);
+		setSituacao(situacao);
+	}
 	
 	public String getDescricao() {
 		return descricao;
