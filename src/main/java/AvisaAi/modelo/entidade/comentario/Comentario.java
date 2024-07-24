@@ -1,6 +1,8 @@
 package AvisaAi.modelo.entidade.comentario;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "comentario")
@@ -24,6 +26,9 @@ public class Comentario {
 
     @Column(name = "avaliacoes_comentario")
     private int avaliacoes;
+    
+    @column(name = "id_resposta")
+    private List<Resposta> respostas = new ArrayList<>();
 
     public Comentario(String conteudo, LocalDateTime dataHora, Usuario usuario, Incidente incidente) {
         setConteudo(conteudo);
@@ -85,5 +90,23 @@ public class Comentario {
         if (this.avaliacoes > 0) {
             this.avaliacoes--;
         }
+    }
+    
+    public List<Resposta> getRespostas() {
+        return respostas;
+    }
+
+    public void setRespostas(List<Resposta> respostas) {
+        this.respostas = respostas;
+    }
+
+    public void adicionarResposta(Resposta resposta) {
+        respostas.add(resposta);
+        resposta.setComentarioPai(this);
+    }
+
+    public void removerResposta(Resposta resposta) {
+        respostas.remove(resposta);
+        resposta.setComentarioPai(null);
     }
 }
