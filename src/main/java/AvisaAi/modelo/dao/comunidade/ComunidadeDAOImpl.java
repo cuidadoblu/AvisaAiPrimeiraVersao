@@ -16,7 +16,7 @@ public class ComunidadeDAOImpl implements ClienteDAO {
 		
 	}
 	
-	public List<Comunidade> recuperarComunidades(Comunidade comunidade) {
+	public List<Comunidade> recuperarComunidades() {
 		
 	}
 }
