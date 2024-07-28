@@ -2,21 +2,21 @@ package AvisaAi.modelo.dao.comentario;
 
 import java.util.List;
 
-public abstract class ComentarioDAOImpl implements ComentarioDAO {
+public class ComentarioDAOImpl implements ComentarioDAO {
 	
-	void inserirComentario(Comentario comentario) {
+	public void inserirComentario(Comentario comentario) {
 		
 	}
 
-	void deletarComentario(Comentario comentario) {
+	public void deletarComentario(Comentario comentario) {
 		
 	}
 
-	void atualizarComentario(Comentario comentario) {
+	public void atualizarComentario(Comentario comentario) {
 		
 	}
 
-	List<Comentario> recuperarComentarios() {
+	public List<Comentario> recuperarComentarios() {
 		
 	}
 }
