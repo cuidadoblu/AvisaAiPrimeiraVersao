@@ -1,0 +1,1 @@
+package AvisaAi.modelo.enumeracao.categoria;
