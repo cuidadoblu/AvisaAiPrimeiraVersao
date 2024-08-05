@@ -1,46 +1,70 @@
-package modelo.entidade.incidente;
+package AvisaAi.modelo.entidade.incidente;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
-import modelo.entidade.comunidade.Comunidade;
+import AvisaAi.modelo.entidade.comunidade.Comunidade;
+import AvisaAi.modelo.enumeracao.categoria.Categoria;
+import AvisaAi.modelo.entidade.usuario.Usuario;
+import AvisaAi.modelo.entidade.localidade.Localidade;
+
 
 @Entity
 @Table(name = "incidente")
-public class Incidente extends Comunidade{
+public class Incidente implements Serializable{
 	
+	static final long serialVersionUID = -3363285045481180558L;
+
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_incidente")
-	private int idIncidente;
+	private Long id;
 	
-	@Column(name = "descricao_incidente")
+	@Column(name = "descricao_incidente", length = 950, nullable = false)
 	private String descricao;
 	
-	@Column(name = "data_incidente")
-	private LocalDateTime data;
+	@Column(name = "data_incidente", nullable = false)
+	private LocalDateTime dataHora;
 	
-	@Column(name = "id_categoria")
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_categoria", nullable = false)
 	private Categoria categoria;
 	
-	@Column(name = "id_comunidade")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_comunidade", nullable = false)
 	private Comunidade comunidade;
 	
-	@Column(name = "id_usuario")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_usuario", nullable = false)
 	private Usuario usuario;
 	
-	@Column(name = "id_localidade")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_localidade", nullable = false)
 	private Localidade localidade;
 	
-	@Column(name = "id_situacao")
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_situacao", nullable = false)
 	private Situacao situacao;
 	
-	public Incidente(String descricao, LocalDateTime data, Categoria categoria, Comunidade comunidade, Usuario usuario, Localidade localidade, Situacao situacao) {
+	public Incidente() {}
+	
+	public Incidente(String descricao, LocalDateTime dataHora, Categoria categoria, Comunidade comunidade, Usuario usuario, Localidade localidade, Situacao situacao) {
 		setDescricao(descricao);
-		setData(data);
+		setDataHora(dataHora);
 		setCategoria(categoria);
 		setComunidade(comunidade);
 		setUsuario(usuario);
 		setLocalidade(localidade);
 		setSituacao(situacao);
+	}
+	
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 	public String getDescricao() {
@@ -51,12 +75,12 @@ public class Incidente extends Comunidade{
 		this.descricao = descricao;
 	}
 	
-	public LocalDateTime getData() {
-		return data;
+	public LocalDateTime getDataHora() {
+		return dataHora;
 	}
 	
-	public void setData (LocalDateTime data) {
-		this.data = data;
+	public void setDataHora (LocalDateTime data) {
+		this.dataHora = data;
 	}
 	
 	public Categoria getCategoria() {
@@ -99,7 +123,21 @@ public class Incidente extends Comunidade{
 		this.situacao = situacao;
 	}
 	
-	
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Incidente other = (Incidente) obj;
+		return Objects.equals(id, other.id);
+	}
+
 	
 
 }
