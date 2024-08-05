@@ -12,7 +12,7 @@ public class Contato implements Serializable{
 	@Id;
 	@GeneratedValue(strategy = GenerationType.IDENTIFY)
 	@Column(name = "id_contato")
-	private int id;
+	private Long id;
 	
 	@Column(name = "telefone_contato", lenght = 13, nullable = false)
 	private String telefone;
