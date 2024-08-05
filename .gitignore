@@ -1,2 +1,5 @@
 /target/
-/.apt_generated_tests/
+/.git/
+/.setting/
+/.project
+/.classpath
