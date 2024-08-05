@@ -1,48 +1,65 @@
 package AvisaAi.modelo.entidade.comentario;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
+import AvisaAi.modelo.entidade.usuario.Usuario;
+import AvisaAi.modelo.entidade.incidente.Incidente;
+import AvisaAi.modelo.entidade.comentario.resposta.Resposta;
 
 @Entity
 @Table(name = "comentario")
-public class Comentario {
+public class Comentario implements Serializable {
 	
-    @Id
-    @Column(name = "id_comentario")
-    private int id;
+	/**
+	 * 
+	 */
 
-    @Column(name = "conteudo_comentario")
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_comentario")
+    private Long id;
+
+    @Column(name = "conteudo_comentario", length = 950, nullable = false)
     private String conteudo;
 
-    @Column(name = "data_hora_comentario")
+    @Column(name = "data_hora_comentario", nullable = false)
     private LocalDateTime dataHora;
 
-    @Column(name = "id_usuario")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
-    @Column(name = "id_incidente")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_incidente", nullable = false)
     private Incidente incidente;
 
     @Column(name = "avaliacoes_comentario")
     private int avaliacoes;
-    
-    @column(name = "id_resposta")
+
+    @OneToMany(mappedBy = "comentarioPai", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Resposta> respostas = new ArrayList<>();
 
+    public Comentario() {}
+
     public Comentario(String conteudo, LocalDateTime dataHora, Usuario usuario, Incidente incidente) {
-        setConteudo(conteudo);
-        setDataHora(dataHora);
-        setUsuario(usuario);
-        setIncidente(incidente);
+        this.conteudo = conteudo;
+        this.dataHora = dataHora;
+        this.usuario = usuario;
+        this.incidente = incidente;
         this.avaliacoes = 0;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -57,9 +74,9 @@ public class Comentario {
     public LocalDateTime getDataHora() {
         return dataHora;
     }
-    
-    public LocalDateTime setDataHora(LocalDateTime dataHora) {
-    	return this.dataHora = dataHora;
+
+    public void setDataHora(LocalDateTime dataHora) {
+        this.dataHora = dataHora;
     }
 
     public Usuario getUsuario() {
@@ -91,7 +108,7 @@ public class Comentario {
             this.avaliacoes--;
         }
     }
-    
+
     public List<Resposta> getRespostas() {
         return respostas;
     }
@@ -108,5 +125,20 @@ public class Comentario {
     public void removerResposta(Resposta resposta) {
         respostas.remove(resposta);
         resposta.setComentarioPai(null);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+        Comentario other = (Comentario) obj;
+        return Objects.equals(id, other.id);
     }
 }
