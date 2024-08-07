@@ -4,10 +4,24 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.Entity;
+import org.hibernate.annotations.Table;
+
 import AvisaAi.modelo.entidade.comunidade.Comunidade;
-import AvisaAi.modelo.enumeracao.categoria.Categoria;
-import AvisaAi.modelo.entidade.usuario.Usuario;
+import AvisaAi.modelo.entidade.foto.Foto;
 import AvisaAi.modelo.entidade.localidade.Localidade;
+import AvisaAi.modelo.entidade.usuario.Usuario;
+import AvisaAi.modelo.enumeracao.categoria.Categoria;
+import AvisaAi.modelo.enumeracao.situacao.Situacao;
 
 
 @Entity
@@ -46,6 +60,9 @@ public class Incidente implements Serializable{
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_situacao", nullable = false)
 	private Situacao situacao;
+	
+	@Column(name = "foto_incidente")
+	private Foto fotoIncidente;
 	
 	public Incidente() {}
 	
@@ -121,6 +138,14 @@ public class Incidente implements Serializable{
 	
 	public void setSituacao(Situacao situacao) {
 		this.situacao = situacao;
+	}
+	
+	public Foto getFotoIncidente() {
+		return fotoIncidente;
+	}
+	
+	public void setFotoIncidente(Foto fotoIncidente) {
+		this.fotoIncidente = fotoIncidente;
 	}
 	
 	public int hashCode() {
