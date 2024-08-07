@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,9 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-
-import org.hibernate.annotations.Entity;
-import org.hibernate.annotations.Table;
+import javax.persistence.Table;
 
 import AvisaAi.modelo.entidade.foto.Foto;
 import AvisaAi.modelo.entidade.incidente.Incidente;
@@ -33,30 +33,28 @@ public class Comunidade implements Serializable {
 	@Column(name = "id_comunidade")
 	private Long id;
 	
+	@Column(name = "nome_comunidade", length = 30, nullable = false)
+	private String nome;
+	
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_localidade", referencedColumnName = "id_localidade")
+	private Localidade localidade;
 	
 	@Column(name = "foto_perfil_comunidade")
 	private Foto fotoPerfil;
 	
-	@Column(name = "nome_comunidade", length = 30, nullable = false)
-	private String nome;
-	
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_localidade", nullable = false)
-	private Localidade localidade;
-	
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_incidente", nullable = false)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "incidente", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Incidente> incidentes;
 	
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_usuario", nullable = false)
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL)
 	private List<Usuario> usuarios;
 	
 	public Comunidade() {}
 	
-	public Comunidade(String nome, Localidade localidade) {
+	public Comunidade(String nome, Localidade localidade, Foto fotoPerfil) {
 		setNome(nome);
 		setLocalidade(localidade);
+		setFotoPerfil(fotoPerfil);
 	}
 	
 	public Long getId() {
