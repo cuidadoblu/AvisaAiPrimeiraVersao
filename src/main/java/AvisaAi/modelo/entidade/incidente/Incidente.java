@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,9 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-
-import org.hibernate.annotations.Entity;
-import org.hibernate.annotations.Table;
+import javax.persistence.Table;
 
 import AvisaAi.modelo.entidade.comunidade.Comunidade;
 import AvisaAi.modelo.entidade.foto.Foto;
@@ -41,24 +41,22 @@ public class Incidente implements Serializable{
 	@Column(name = "data_incidente", nullable = false)
 	private LocalDateTime dataHora;
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_categoria", nullable = false)
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "categoria", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Categoria categoria;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_comunidade", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_comunidade", referencedColumnName = "id_comunidade")
 	private Comunidade comunidade;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_usuario", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
 	private Usuario usuario;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_localidade", nullable = false)
+	@JoinColumn(name = "id_localidade", referencedColumnName = "id_localidade")
 	private Localidade localidade;
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_situacao", nullable = false)
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "situacao", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Situacao situacao;
 	
 	@Column(name = "foto_incidente")
@@ -66,7 +64,7 @@ public class Incidente implements Serializable{
 	
 	public Incidente() {}
 	
-	public Incidente(String descricao, LocalDateTime dataHora, Categoria categoria, Comunidade comunidade, Usuario usuario, Localidade localidade, Situacao situacao) {
+	public Incidente(String descricao, LocalDateTime dataHora, Categoria categoria, Comunidade comunidade, Usuario usuario, Localidade localidade, Situacao situacao, Foto fotoIncidente) {
 		setDescricao(descricao);
 		setDataHora(dataHora);
 		setCategoria(categoria);
@@ -74,6 +72,7 @@ public class Incidente implements Serializable{
 		setUsuario(usuario);
 		setLocalidade(localidade);
 		setSituacao(situacao);
+		setFotoIncidente(fotoIncidente);
 	}
 	
 	public Long getId() {
