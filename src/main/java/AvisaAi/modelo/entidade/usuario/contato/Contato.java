@@ -2,6 +2,8 @@ package AvisaAi.modelo.entidade.usuario.contato;
 
 import java.io.Serializable;
 import java.util.Objects;
+import org.hibernate.annotations.Entity;
+import org.hibernate.annotations.Table;
 
 @Entity
 @Table(name = "contato")
@@ -10,14 +12,14 @@ public class Contato implements Serializable{
 	private static final long serialVersionUID = -6243156960143903528L;
 
 	@Id;
-	@GeneratedValue(strategy = GenerationType.IDENTIFY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_contato")
 	private Long id;
 	
-	@Column(name = "telefone_contato", lenght = 13, nullable = false)
+	@Column(name = "telefone_contato", length = 13, nullable = false)
 	private String telefone;
 	
-	@Column(name = "email_contato", lenght = 45, nullable = false)
+	@Column(name = "email_contato", length = 45, nullable = false)
 	private String email;
 	
 	public String getTelefone() {
