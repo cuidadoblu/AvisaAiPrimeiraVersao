@@ -4,6 +4,20 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.Entity;
+import org.hibernate.annotations.Table;
+
+import AvisaAi.modelo.entidade.foto.Foto;
 import AvisaAi.modelo.entidade.incidente.Incidente;
 import AvisaAi.modelo.entidade.localidade.Localidade;
 import AvisaAi.modelo.entidade.usuario.Usuario;
@@ -15,11 +29,15 @@ public class Comunidade implements Serializable {
 	private static final long serialVersionUID = -9216497520338583127L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTIFY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_comunidade")
 	private Long id;
 	
-	@Column(name = "nome_comunidade", lenght = 30, nullable = false)
+	
+	@Column(name = "foto_perfil_comunidade")
+	private Foto fotoPerfil;
+	
+	@Column(name = "nome_comunidade", length = 30, nullable = false)
 	private String nome;
 	
 	@OneToOne(fetch = FetchType.LAZY)
@@ -49,6 +67,13 @@ public class Comunidade implements Serializable {
 		this.id = id;
 	}
 	
+	public Foto getFotoPerfil() {
+		return fotoPerfil;
+	}
+	
+	public void setFotoPerfil(Foto fotoPerfil) {
+		this.fotoPerfil = fotoPerfil;
+	}
 	public String getNome() {
 		return nome;
 	}
