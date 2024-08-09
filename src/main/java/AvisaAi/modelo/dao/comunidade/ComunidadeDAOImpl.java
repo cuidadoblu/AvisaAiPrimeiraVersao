@@ -177,17 +177,4 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 			}
 		}
 	}
-	
-	public SessionFactory conectarBanco() {
-		
-		Configuration configuracao = new Configuration();
-		
-		configuracao.addAnnotatedClass(Comunidade.class);
-		configuracao.configure("hibernate.cfg.xml");
-		
-		ServiceRegistry servico = new StandardServiceRegistryBuilder().applySettings(configuracao.getProperties()).build();
-		SessionFactory fabricaSessao = configuracao.buildSessionFactory(servico);
-		
-		return fabricaSessao;
-	}
 }
