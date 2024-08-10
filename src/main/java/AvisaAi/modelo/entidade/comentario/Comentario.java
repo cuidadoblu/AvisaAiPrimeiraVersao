@@ -6,6 +6,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import AvisaAi.modelo.entidade.usuario.Usuario;
 import AvisaAi.modelo.entidade.incidente.Incidente;
 import AvisaAi.modelo.entidade.comentario.resposta.Resposta;
@@ -13,14 +25,10 @@ import AvisaAi.modelo.entidade.comentario.resposta.Resposta;
 @Entity
 @Table(name = "comentario")
 public class Comentario implements Serializable {
-	
-	/**
-	 * 
-	 */
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_comentario")
     private Long id;
@@ -119,12 +127,12 @@ public class Comentario implements Serializable {
 
     public void adicionarResposta(Resposta resposta) {
         respostas.add(resposta);
-        resposta.setComentarioPai(this);
+        resposta.setComentarioOrigem(this);
     }
 
     public void removerResposta(Resposta resposta) {
         respostas.remove(resposta);
-        resposta.setComentarioPai(null);
+        resposta.setComentarioOrigem(null);
     }
 
     @Override
