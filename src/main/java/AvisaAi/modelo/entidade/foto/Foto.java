@@ -3,17 +3,20 @@ package AvisaAi.modelo.entidade.foto;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 @Entity
 @Table(name = "foto")
 public class Foto implements Serializable {
 	
-	/**
-	 * 
-	 */
+	private static final long serialVersionUID = 1L;
 
-    private static final long serialVersionUID = 1L;
-
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_foto")
     private Long id;
