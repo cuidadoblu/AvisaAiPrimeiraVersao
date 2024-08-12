@@ -41,6 +41,8 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 			
 		}	catch (Exception sqlException){
 			
+			sqlException.printStackTrace();
+			
 			if (sessao.getTransaction() != null) {
 				sessao.getTransaction().rollback();
 			}
@@ -67,6 +69,9 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 			sessao.getTransaction().commit();
 			
 		}	catch (Exception sqlException) {
+			
+			sqlException.printStackTrace();
+			
 			if (sessao.getTransaction() != null) {
 				sessao.getTransaction().rollback();
 			}
@@ -92,6 +97,9 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 			sessao.getTransaction().commit();
 			
 		}	catch (Exception sqlException) {
+			
+			sqlException.printStackTrace();
+			
 			if (sessao.getTransaction() != null) {
 				sessao.getTransaction().rollback();
 			}
@@ -167,6 +175,9 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 			sessao.getTransaction().commit();
 			
 		}	catch (Exception sqlException) {
+			
+			sqlException.printStackTrace();
+			
 			if (sessao.getTransaction() != null) {
 				sessao.getTransaction().rollback();
 			}
