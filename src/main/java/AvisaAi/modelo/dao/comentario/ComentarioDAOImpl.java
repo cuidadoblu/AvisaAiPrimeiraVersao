@@ -27,7 +27,7 @@ public class ComentarioDAOImpl implements ComentarioDAO {
         
         try {
         	
-            sessao = conectarBanco().openSession();
+            sessao = fabrica.getConexao().openSession();
             sessao.beginTransaction();
             
             sessao.save(comentario);
@@ -53,7 +53,7 @@ public class ComentarioDAOImpl implements ComentarioDAO {
         
         try {
         	
-            sessao = conectarBanco().openSession();
+            sessao = fabrica.getConexao().openSession();
             sessao.beginTransaction();
             
             sessao.remove(comentario);
@@ -79,7 +79,7 @@ public class ComentarioDAOImpl implements ComentarioDAO {
         
         try {
         	
-            sessao = conectarBanco().openSession();
+            sessao = fabrica.getConexao().openSession();
             sessao.beginTransaction();
             
             sessao.update(comentario);
@@ -106,7 +106,7 @@ public class ComentarioDAOImpl implements ComentarioDAO {
         
         try {
         	
-            sessao = conectarBanco().openSession();
+            sessao = fabrica.getConexao().openSession();
             sessao.beginTransaction();
             
             CriteriaBuilder construtor = sessao.getCriteriaBuilder();
@@ -143,7 +143,7 @@ public class ComentarioDAOImpl implements ComentarioDAO {
         
         try {
         	
-            sessao = conectarBanco().openSession();
+            sessao = fabrica.getConexao().openSession();
             sessao.beginTransaction();
             
             CriteriaBuilder construtor = sessao.getCriteriaBuilder();
@@ -180,7 +180,7 @@ public class ComentarioDAOImpl implements ComentarioDAO {
         
         try {
         	
-            sessao = conectarBanco().openSession();
+            sessao = fabrica.getConexao().openSession();
             sessao.beginTransaction();
             CriteriaBuilder construtor = sessao.getCriteriaBuilder();
             CriteriaQuery<Comentario> criteria = construtor.createQuery(Comentario.class);
