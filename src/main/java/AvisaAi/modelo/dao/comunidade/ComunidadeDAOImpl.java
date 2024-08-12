@@ -32,7 +32,7 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 		
 		try {
 			
-			sessao = conectarBanco().openSession();
+			sessao = fabrica.getConexao().openSession();
 			sessao.beginTransaction();
 			
 			sessao.save(comunidade);
@@ -59,7 +59,7 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 		
 		try {
 			
-			sessao = conectarBanco().openSession();
+			sessao = fabrica.getConexao().openSession();
 			sessao.beginTransaction();
 			
 			sessao.remove(comunidade);
@@ -84,7 +84,7 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 		
 		try {
 			
-			sessao = conectarBanco().openSession();
+			sessao = fabrica.getConexao().openSession();
 			sessao.beginTransaction();
 			
 			sessao.update(comunidade);
@@ -110,7 +110,7 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 		
 		try {
 			
-			sessao = conectarBanco().openSession();
+			sessao = fabrica.getConexao().openSession();
 			sessao.beginTransaction();
 			
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();		
@@ -149,7 +149,7 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 		
 		try {
 			
-			sessao = conectarBanco().openSession();
+			sessao = fabrica.getConexao().openSession();
 			sessao.beginTransaction();
 			
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
