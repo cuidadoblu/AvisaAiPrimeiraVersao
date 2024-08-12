@@ -157,7 +157,7 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 			CriteriaQuery<Comunidade> criteria = construtor.createQuery(Comunidade.class);
 			Root<Comunidade> raizComunidade = criteria.from(Comunidade.class);
 			
-			Join<Comunidade, Localidade> juncaoLocalidade = raizComunidade.join(Comunidade_.cliente);
+			Join<Comunidade, Localidade> juncaoLocalidade = raizComunidade.join(Comunidade_.localidade);
 			
 			ParameterExpression<String> bairro = construtor.parameter(String.class);
 			criteria.where(construtor.equal(juncaoLocalidade.get(Localidade_.bairro), bairro));
