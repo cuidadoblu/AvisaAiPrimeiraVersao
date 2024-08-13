@@ -87,8 +87,8 @@ public class Resposta implements Serializable {
         return comentarioOrigem;
     }
 
-    public void setComentarioOrigem(Comentario comentarioPai) {
-        this.comentarioOrigem = comentarioPai;
+    public void setComentarioOrigem(Comentario comentarioOrigem) {
+        this.comentarioOrigem = comentarioOrigem;
     }
 
     @Override
