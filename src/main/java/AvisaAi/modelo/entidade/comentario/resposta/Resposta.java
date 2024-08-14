@@ -4,17 +4,26 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import AvisaAi.modelo.entidade.comentario.Comentario;
+import AvisaAi.modelo.entidade.usuario.Usuario;
+
 @Entity
 @Table(name = "resposta")
 public class Resposta implements Serializable {
 	
-	/**
-	 * 
-	 */
+	private static final long serialVersionUID = 1L;
 
-    private static final long serialVersionUID = 1L;
-
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_resposta")
     private Long id;
@@ -26,20 +35,20 @@ public class Resposta implements Serializable {
     private LocalDateTime dataHora;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_usuario", nullable = false)
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario", nullable = false)
     private Usuario usuario;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_comentario_pai", nullable = false)
-    private Comentario comentarioPai;
+    @JoinColumn(name = "id_comentario_origem", referencedColumnName = "id_comentario", nullable = false)
+    private Comentario comentarioOrigem;
 
     public Resposta() {}
 
-    public Resposta(String conteudo, LocalDateTime dataHora, Usuario usuario, Comentario comentarioPai) {
+    public Resposta(String conteudo, LocalDateTime dataHora, Usuario usuario, Comentario comentarioOrigem) {
         this.conteudo = conteudo;
         this.dataHora = dataHora;
         this.usuario = usuario;
-        this.comentarioPai = comentarioPai;
+        this.comentarioOrigem = comentarioOrigem;
     }
 
     public Long getId() {
@@ -74,12 +83,12 @@ public class Resposta implements Serializable {
         this.usuario = usuario;
     }
 
-    public Comentario getComentarioPai() {
-        return comentarioPai;
+    public Comentario getComentarioOrigem() {
+        return comentarioOrigem;
     }
 
-    public void setComentarioPai(Comentario comentarioPai) {
-        this.comentarioPai = comentarioPai;
+    public void setComentarioOrigem(Comentario comentarioOrigem) {
+        this.comentarioOrigem = comentarioOrigem;
     }
 
     @Override
