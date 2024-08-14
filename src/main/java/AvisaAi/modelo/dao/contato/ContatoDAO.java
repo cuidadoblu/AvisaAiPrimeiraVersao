@@ -1,5 +1,8 @@
 package AvisaAi.modelo.dao.contato;
 
+import AvisaAi.modelo.entidade.usuario.Usuario;
+import AvisaAi.modelo.entidade.usuario.contato.Contato;
+
 public interface ContatoDAO {
 	
 	void inserirContato(Contato contato);
@@ -7,8 +10,6 @@ public interface ContatoDAO {
 	void deletarContato(Contato contato);
 	
 	void atualizarContato(Contato contato);
-	
-	List<Contato> recuperarContato();
 	
 	Contato recuperarContatoUsuario(Usuario usuario);
 
