@@ -157,13 +157,15 @@ public class IncidenteDAOImpl implements IncidenteDAO{
 				sessao.close();
 			}
 		}
+		
+		return incidentes;
 	
 	}
 
 	public List<Incidente> consultarIncidenteCategoria(Categoria categoria) {
 		//Gerar metadados e posteriormente consertar aqui com o resultado
 		Session sessao = null;
-		Incidente incidente = null;
+		List<Incidente> incidentes = null;
 		
 		try {
 			
@@ -199,6 +201,8 @@ public class IncidenteDAOImpl implements IncidenteDAO{
 				sessao.close();
 			}
 		}
+		
+		return incidentes;
 
 	}
 
@@ -245,6 +249,8 @@ public class IncidenteDAOImpl implements IncidenteDAO{
 				sessao.close();
 			}
 		}
+		
+		return incidentes;
 
 	}
 
@@ -292,6 +298,8 @@ public class IncidenteDAOImpl implements IncidenteDAO{
 			}
 		}
 		
+		return incidentes;
+		
 	}
 
 	public List<Incidente> consultarIncidenteSituacao(Situacao situacao) {
@@ -333,6 +341,8 @@ public class IncidenteDAOImpl implements IncidenteDAO{
 				sessao.close();
 			}
 		}
+		
+		return incidentes;
 
 	}
 
