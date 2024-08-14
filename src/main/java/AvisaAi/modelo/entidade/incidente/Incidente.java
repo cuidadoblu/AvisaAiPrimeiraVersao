@@ -2,6 +2,7 @@ package AvisaAi.modelo.entidade.incidente;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.CascadeType;
@@ -60,7 +61,7 @@ public class Incidente implements Serializable{
 	private Situacao situacao;
 	
 	@Column(name = "foto_incidente")
-	private Foto fotoIncidente;
+	private List<Foto> fotoIncidente;
 	
 	public Incidente() {}
 	
