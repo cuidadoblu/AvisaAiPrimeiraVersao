@@ -133,6 +133,8 @@ public class IncidenteDAOImpl implements IncidenteDAO{
 			CriteriaQuery<Incidente> criteria = construtor.createQuery(Incidente.class);
 			Root<Incidente> raizIncidente = criteria.from(Incidente.class);
 			
+			criteria.select(raizIncidente);
+			
 //			Join<Incidente, Comunidade> juncaoComunidade = raizIncidente.join(Incidente_.comunidade);
 //			
 //			ParameterExpression<Long> idComunidade = construtor.parameter(Long.class);
@@ -173,6 +175,8 @@ public class IncidenteDAOImpl implements IncidenteDAO{
 			CriteriaQuery<Incidente> criteria = construtor.createQuery(Incidente.class);
 			Root<Incidente> raizIncidente = criteria.from(Incidente.class);
 			
+			criteria.select(raizIncidente);
+			
 			Join<Incidente, Categoria> juncaoCategoria = raizIncidente.join(Incidente_.categoria);
 			
 			ParameterExpression<Categoria> categoriaIncidente = construtor.parameter(Categoria.class);
@@ -212,6 +216,8 @@ public class IncidenteDAOImpl implements IncidenteDAO{
 			
 			CriteriaQuery<Incidente> criteria = construtor.createQuery(Incidente.class);
 			Root<Incidente> raizIncidente = criteria.from(Incidente.class);
+			
+			criteria.select(raizIncidente);
 			
 //			Join<Incidente, Usuario> juncaoUsuario = raizIncidente.join(Incidente_.usuario);
 //			
@@ -257,6 +263,8 @@ public class IncidenteDAOImpl implements IncidenteDAO{
 			CriteriaQuery<Incidente> criteria = construtor.createQuery(Incidente.class);
 			Root<Incidente> raizIncidente = criteria.from(Incidente.class);
 			
+			criteria.select(raizIncidente);
+			
 //			Join<Incidente, Localidade> juncaoLocalidade = raizIncidente.join(Incidente_.localidade);
 //			
 //			Predicate predicadoLogradouroLocalidade = construtor.equal(juncaoLocalidade.get(Localidade_.logradouro));
@@ -300,6 +308,8 @@ public class IncidenteDAOImpl implements IncidenteDAO{
 			
 			CriteriaQuery<Incidente> criteria = construtor.createQuery(Incidente.class);
 			Root<Incidente> raizIncidente = criteria.from(Incidente.class);
+			
+			criteria.select(raizIncidente);
 			
 			Join<Incidente, Situacao> juncaoSituacao = raizIncidente.join(Incidente_.situacao);
 			
