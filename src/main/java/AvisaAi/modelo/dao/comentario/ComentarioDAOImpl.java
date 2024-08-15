@@ -1,13 +1,14 @@
 package AvisaAi.modelo.dao.comentario;
 
 import java.util.List;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
-import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
+
 import AvisaAi.modelo.entidade.comentario.Comentario;
 import AvisaAi.modelo.entidade.incidente.Incidente;
 import AvisaAi.modelo.entidade.usuario.Usuario;
@@ -204,5 +205,42 @@ public class ComentarioDAOImpl implements ComentarioDAO {
             }
         }
         return comentarios;
+    }
+
+	public Comentario consultarComentarioId(String id) {
+		
+		Session sessao = null;
+        Comentario comentario = null;
+        
+        try {
+        	
+            sessao = fabrica.getConexao().openSession();
+            sessao.beginTransaction();
+            
+            CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+            
+            CriteriaQuery<Comentario> criteria = construtor.createQuery(Comentario.class);
+            Root<Comentario> raizComentario = criteria.from(Comentario.class);
+            
+            criteria.select(raizComentario).where(construtor.equal(raizComentario.get("id"), id));
+            
+            comentario = sessao.createQuery(criteria).getSingleResult();
+            
+            sessao.getTransaction().commit();
+            
+        } catch (Exception sqlException) {
+        	
+            sqlException.printStackTrace();
+            
+            if (sessao.getTransaction() != null) {
+                sessao.getTransaction().rollback();
+            }
+        } finally {
+        	
+            if (sessao != null) {
+                sessao.close();
+            }
+        }
+        return comentario;
     }
 }
