@@ -92,7 +92,7 @@ public class LocalidadeDAOImpl implements LocalidadeDAO {
         
         query.select(root).where(
             criteriaBuilder.and(
-                criteriaBuilder.equal(root.get("bairro"), bairro)
+                criteriaBuilder.equal(root.get(Localidade_.bairro))
             )
         );
         
@@ -112,7 +112,7 @@ public class LocalidadeDAOImpl implements LocalidadeDAO {
         
         query.select(root).where(
             criteriaBuilder.and(
-                criteriaBuilder.equal(root.get("cidade"), cidade)
+                criteriaBuilder.equal(root.get(Localidade_.cidade))
             )
         );
         
@@ -132,7 +132,7 @@ public class LocalidadeDAOImpl implements LocalidadeDAO {
         
         query.select(root).where(
             criteriaBuilder.and(
-                criteriaBuilder.equal(root.get("logradouro"), logradouro)
+                criteriaBuilder.equal(root.get(Localidade_.logradouro))
             )
         );
         
