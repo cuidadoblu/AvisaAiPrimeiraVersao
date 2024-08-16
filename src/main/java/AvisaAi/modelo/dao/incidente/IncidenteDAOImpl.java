@@ -140,7 +140,7 @@ public class IncidenteDAOImpl implements IncidenteDAO{
 //			ParameterExpression<Long> idComunidade = construtor.parameter(Long.class);
 //			criteria.where(construtor.equal(juncaoComunidade.get(Comunidade_.id), idComunidade));
 			
-			incidentes = sessao.createQuery(criteria).setParameter(idComunidade, comunidade.getId()).getResultList();
+//			incidentes = sessao.createQuery(criteria).setParameter(idComunidade, comunidade.getId()).getResultList();
 			
 			sessao.getTransaction().commit();
 			
@@ -179,7 +179,7 @@ public class IncidenteDAOImpl implements IncidenteDAO{
 			
 			criteria.select(raizIncidente);
 			
-			Join<Incidente, Categoria> juncaoCategoria = raizIncidente.join(Incidente_.categoria);
+//			Join<Incidente, Categoria> juncaoCategoria = raizIncidente.join(Incidente_.categoria);
 			
 			ParameterExpression<Categoria> categoriaIncidente = construtor.parameter(Categoria.class);
 //			criteria.where(construtor.equal(juncaoCategoria.get(Categoria_.?), categoriaIncidente));
@@ -229,8 +229,8 @@ public class IncidenteDAOImpl implements IncidenteDAO{
 //			
 //			Predicate predicadoDataHoraIncidente = construtor.equal(raizIncidente.get(Incidente_.dataHora));
 			
-			Predicate predicadoResultado = construtor.and(predicadoIdUsuario, predicadoDataHoraIncidente);
-			criteria.where(predicadoResultado);
+//			Predicate predicadoResultado = construtor.and(predicadoIdUsuario, predicadoDataHoraIncidente);
+//			criteria.where(predicadoResultado);
 			
 			incidentes = sessao.createQuery(criteria).getResultList();
 			
@@ -277,8 +277,8 @@ public class IncidenteDAOImpl implements IncidenteDAO{
 //			
 //			Predicate predicadoDataHoraIncidente = construtor.equal(raizIncidente.get(Incidente_.dataHora));
 			
-			Predicate predicadoResultado = construtor.equal(predicadoLogradouroLocalidade, predicadoDataHoraIncidente);
-			criteria.where(predicadoResultado);
+//			Predicate predicadoResultado = construtor.equal(predicadoLogradouroLocalidade, predicadoDataHoraIncidente);
+//			criteria.where(predicadoResultado);
 			
 			incidentes = sessao.createQuery(criteria).getResultList();
 			
@@ -319,7 +319,7 @@ public class IncidenteDAOImpl implements IncidenteDAO{
 			
 			criteria.select(raizIncidente);
 			
-			Join<Incidente, Situacao> juncaoSituacao = raizIncidente.join(Incidente_.situacao);
+//			Join<Incidente, Situacao> juncaoSituacao = raizIncidente.join(Incidente_.situacao);
 			
 			ParameterExpression<Situacao> situacaoIncidente = construtor.parameter(Situacao.class);
 //			criteria.where(construtor.equal(juncaoSituacao.get(Situacao_.?), situacaoIncidente));

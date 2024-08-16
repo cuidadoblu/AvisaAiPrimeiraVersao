@@ -36,6 +36,9 @@ public class Incidente implements Serializable{
 	@Column(name = "id_incidente")
 	private Long id;
 	
+	@Column(name = "titulo_incidente", length = 100, nullable = false)
+	private String titulo;
+	
 	@Column(name = "descricao_incidente", length = 950, nullable = false)
 	private String descricao;
 	
@@ -67,7 +70,8 @@ public class Incidente implements Serializable{
 	
 	public Incidente() {}
 	
-	public Incidente(String descricao, LocalDateTime dataHora, Categoria categoria, Comunidade comunidade, Usuario usuario, Localidade localidade, Situacao situacao, List<Foto> fotoIncidente) {
+	public Incidente(String titulo, String descricao, LocalDateTime dataHora, Categoria categoria, Comunidade comunidade, Usuario usuario, Localidade localidade, Situacao situacao, List<Foto> fotoIncidente) {
+		setTitulo(titulo);
 		setDescricao(descricao);
 		setDataHora(dataHora);
 		setCategoria(categoria);
@@ -84,6 +88,14 @@ public class Incidente implements Serializable{
 	
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public String getTitulo() {
+		return titulo;
+	}
+	
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 	
 	public String getDescricao() {
