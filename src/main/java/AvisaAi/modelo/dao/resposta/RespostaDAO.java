@@ -7,7 +7,7 @@ import AvisaAi.modelo.entidade.comentario.resposta.Resposta;
 import AvisaAi.modelo.entidade.usuario.Usuario;
 
 public interface RespostaDAO {
-	
+
 	void inserirResposta(Resposta resposta);
 
 	void deletarResposta(Resposta resposta);
@@ -15,9 +15,10 @@ public interface RespostaDAO {
 	void atualizarResposta(Resposta resposta);
 
 	List<Resposta> recuperarRespostas();
-	
-	List<Resposta> consultarRespostaComentarioOrigem(Comentario comentario);
-	
-	List<Resposta> consultarComentarioUsuario(Usuario usuario);
 
+	List<Resposta> consultarRespostaComentarioOrigem(Comentario comentario);
+
+	List<Resposta> consultarRespostaUsuario(Usuario usuario);
+
+	Resposta consultarRespostaId(String id);
 }
