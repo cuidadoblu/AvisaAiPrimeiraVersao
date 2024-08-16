@@ -147,27 +147,4 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		
 		return usuarios;
 	}
-	
-//	private SessionFactory conectarBanco() {
-//
-//		Configuration configuracao = new Configuration();
-//
-//		configuracao.addAnnotatedClass(Usuario.class);
-//		configuracao.addAnnotatedClass(Contato.class);
-//		configuracao.addAnnotatedClass(Comentario.class);
-//		configuracao.addAnnotatedClass(Incidente.class);
-//		configuracao.addAnnotatedClass(Comunidade.class);
-//		configuracao.addAnnotatedClass(Localidade.class);
-//		configuracao.addAnnotatedClass(Papel.class);
-//		configuracao.addAnnotatedClass(Resposta.class);
-//		configuracao.addAnnotatedClass(Foto.class);
-//		
-//		configuracao.configure("hibernate.cfg.xml");
-//
-//		ServiceRegistry servico = new StandardServiceRegistryBuilder().applySettings(configuracao.getProperties()).build();
-//		SessionFactory fabricaSessao = configuracao.buildSessionFactory(servico);
-//
-//		return fabricaSessao;
-//	}
-
 }
