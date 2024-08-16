@@ -27,6 +27,13 @@ public class Contato implements Serializable{
 	@Column(name = "email_contato", length = 45, nullable = false)
 	private String email;
 	
+	public Contato() {}
+	
+	public Contato(String telefone, String email) {
+		setTelefone(telefone);
+		setEmail(email);
+	}
+	
 	public String getTelefone() {
 		return telefone;
 	}
