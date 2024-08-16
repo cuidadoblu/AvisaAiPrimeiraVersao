@@ -2,11 +2,13 @@ package AvisaAi.modelo.entidade.incidente;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -41,7 +43,8 @@ public class Incidente implements Serializable{
 	@Column(name = "data_incidente", nullable = false)
 	private LocalDateTime dataHora;
 	
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "categoria", cascade = CascadeType.ALL, orphanRemoval = true)
+	@Column(name = "categoria")
+	@Enumerated
 	private Categoria categoria;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -56,15 +59,16 @@ public class Incidente implements Serializable{
 	@JoinColumn(name = "id_localidade", referencedColumnName = "id_localidade")
 	private Localidade localidade;
 	
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "situacao", cascade = CascadeType.ALL, orphanRemoval = true)
+	@Column(name = "situacao")
+	@Enumerated
 	private Situacao situacao;
 	
 	@Column(name = "foto_incidente")
-	private Foto fotoIncidente;
+	private List<Foto> fotoIncidente;
 	
 	public Incidente() {}
 	
-	public Incidente(String descricao, LocalDateTime dataHora, Categoria categoria, Comunidade comunidade, Usuario usuario, Localidade localidade, Situacao situacao, Foto fotoIncidente) {
+	public Incidente(String descricao, LocalDateTime dataHora, Categoria categoria, Comunidade comunidade, Usuario usuario, Localidade localidade, Situacao situacao, List<Foto> fotoIncidente) {
 		setDescricao(descricao);
 		setDataHora(dataHora);
 		setCategoria(categoria);
@@ -139,11 +143,11 @@ public class Incidente implements Serializable{
 		this.situacao = situacao;
 	}
 	
-	public Foto getFotoIncidente() {
+	public List<Foto> getFotoIncidente() {
 		return fotoIncidente;
 	}
 	
-	public void setFotoIncidente(Foto fotoIncidente) {
+	public void setFotoIncidente(List<Foto> fotoIncidente) {
 		this.fotoIncidente = fotoIncidente;
 	}
 	
