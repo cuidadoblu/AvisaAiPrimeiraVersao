@@ -70,7 +70,8 @@ public class Incidente implements Serializable{
 	
 	public Incidente() {}
 	
-	public Incidente(String descricao, LocalDateTime dataHora, Categoria categoria, Comunidade comunidade, Usuario usuario, Localidade localidade, Situacao situacao, List<Foto> fotoIncidente) {
+	public Incidente(String titulo, String descricao, LocalDateTime dataHora, Categoria categoria, Comunidade comunidade, Usuario usuario, Localidade localidade, Situacao situacao, List<Foto> fotoIncidente) {
+		setTitulo(titulo);
 		setDescricao(descricao);
 		setDataHora(dataHora);
 		setCategoria(categoria);
