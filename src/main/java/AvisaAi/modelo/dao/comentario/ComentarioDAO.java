@@ -19,4 +19,6 @@ public interface ComentarioDAO {
 	List<Comentario> consultarComentarioIncidente(Incidente incidente);
 	
 	List<Comentario> consultarComentarioUsuario(Usuario usuario);
+	
+	Comentario consultarComentarioId(String id);
 }
