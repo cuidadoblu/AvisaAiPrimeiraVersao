@@ -7,17 +7,14 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import AvisaAi.modelo.entidade.usuario.Usuario;
 import AvisaAi.modelo.factory.conexao.ConexaoFactory;
 
 public class UsuarioDAOImpl implements UsuarioDAO {
 	
-	private final ConexaoFactory conexaoFactory;
-	
-	public UsuarioDAOImpl() {
-		this.conexaoFactory = new ConexaoFactory();
-	}
+	private final SessionFactory fabrica = ConexaoFactory.getConexao();
 
 	@Override
 	public void inserirUsuario(Usuario usuario) {
@@ -25,7 +22,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 		try {
 
-			sessao = conexaoFactory.getConexao().openSession();
+			sessao = fabrica.openSession();
 			sessao.beginTransaction();
 
 			sessao.save(usuario);
@@ -55,7 +52,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 		try {
 
-			sessao = conexaoFactory.getConexao().openSession();
+			sessao = fabrica.openSession();
 			sessao.beginTransaction();
 
 			sessao.remove(usuario);
@@ -85,7 +82,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 		try {
 
-			sessao = conexaoFactory.getConexao().openSession();
+			sessao = fabrica.openSession();
 			sessao.beginTransaction();
 
 			sessao.update(usuario);
@@ -116,7 +113,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 		try {
 
-			sessao = conexaoFactory.getConexao().openSession();
+			sessao = fabrica.openSession();
 			sessao.beginTransaction();
 
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();

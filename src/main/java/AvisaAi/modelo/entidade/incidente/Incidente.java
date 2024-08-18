@@ -8,12 +8,14 @@ import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -34,6 +36,9 @@ public class Incidente implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_incidente")
+	@JoinTable(name = "lista_incidente_na_comunidade", 
+	joinColumns = @JoinColumn(name = "id_incidente"), 
+	inverseJoinColumns = @JoinColumn(name = "id_comunidade"))
 	private Long id;
 	
 	@Column(name = "titulo_incidente", length = 100, nullable = false)
@@ -46,7 +51,7 @@ public class Incidente implements Serializable{
 	private LocalDateTime dataHora;
 	
 	@Column(name = "categoria")
-	@Enumerated
+	@Enumerated(EnumType.STRING)
 	private Categoria categoria;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -62,11 +67,11 @@ public class Incidente implements Serializable{
 	private Localidade localidade;
 	
 	@Column(name = "situacao")
-	@Enumerated
+	@Enumerated(EnumType.STRING)
 	private Situacao situacao;
 	
-	@Column(name = "foto_incidente")
-	private List<Foto> fotoIncidente;
+//	@Column(name = "foto_incidente")
+//	private List<Foto> fotoIncidente;
 	
 	public Incidente() {}
 	
@@ -79,7 +84,7 @@ public class Incidente implements Serializable{
 		setUsuario(usuario);
 		setLocalidade(localidade);
 		setSituacao(situacao);
-		setFotoIncidente(fotoIncidente);
+//		setFotoIncidente(fotoIncidente);
 	}
 	
 	public Long getId() {
@@ -154,13 +159,13 @@ public class Incidente implements Serializable{
 		this.situacao = situacao;
 	}
 	
-	public List<Foto> getFotoIncidente() {
-		return fotoIncidente;
-	}
-	
-	public void setFotoIncidente(List<Foto> fotoIncidente) {
-		this.fotoIncidente = fotoIncidente;
-	}
+//	public List<Foto> getFotoIncidente() {
+//		return fotoIncidente;
+//	}
+//	
+//	public void setFotoIncidente(List<Foto> fotoIncidente) {
+//		this.fotoIncidente = fotoIncidente;
+//	}
 	
 	public int hashCode() {
 		return Objects.hash(id);

@@ -8,6 +8,7 @@ import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import AvisaAi.modelo.entidade.comentario.Comentario;
 import AvisaAi.modelo.entidade.comentario.resposta.Resposta;
@@ -16,11 +17,7 @@ import AvisaAi.modelo.factory.conexao.ConexaoFactory;
 
 public class RespostaDAOImpl implements RespostaDAO {
 
-	private ConexaoFactory fabrica;
-
-	public RespostaDAOImpl() {
-		fabrica = new ConexaoFactory();
-	}
+	private final SessionFactory fabrica = ConexaoFactory.getConexao();
 
 	public void inserirResposta(Resposta resposta) {
 
@@ -28,7 +25,7 @@ public class RespostaDAOImpl implements RespostaDAO {
 
 		try {
 
-			sessao = fabrica.getConexao().openSession();
+			sessao = fabrica.openSession();
 			sessao.beginTransaction();
 
 			sessao.save(resposta);
@@ -54,7 +51,7 @@ public class RespostaDAOImpl implements RespostaDAO {
 
 		try {
 
-			sessao = fabrica.getConexao().openSession();
+			sessao = fabrica.openSession();
 			sessao.beginTransaction();
 
 			sessao.remove(resposta);
@@ -80,7 +77,7 @@ public class RespostaDAOImpl implements RespostaDAO {
 
 		try {
 
-			sessao = fabrica.getConexao().openSession();
+			sessao = fabrica.openSession();
 			sessao.beginTransaction();
 
 			sessao.update(resposta);
@@ -106,7 +103,7 @@ public class RespostaDAOImpl implements RespostaDAO {
 
 		try {
 
-			sessao = fabrica.getConexao().openSession();
+			sessao = fabrica.openSession();
 			sessao.beginTransaction();
 
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
@@ -142,7 +139,7 @@ public class RespostaDAOImpl implements RespostaDAO {
 
 		try {
 
-			sessao = fabrica.getConexao().openSession();
+			sessao = fabrica.openSession();
 			sessao.beginTransaction();
 
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
@@ -177,7 +174,7 @@ public class RespostaDAOImpl implements RespostaDAO {
 
 		try {
 
-			sessao = fabrica.getConexao().openSession();
+			sessao = fabrica.openSession();
 			sessao.beginTransaction();
 
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
@@ -211,7 +208,7 @@ public class RespostaDAOImpl implements RespostaDAO {
 		Resposta resposta = null;
 
 		try {
-			sessao = fabrica.getConexao().openSession();
+			sessao = fabrica.openSession();
 			sessao.beginTransaction();
 
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();

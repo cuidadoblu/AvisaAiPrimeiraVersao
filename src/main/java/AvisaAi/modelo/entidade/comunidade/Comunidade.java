@@ -12,8 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -46,16 +45,21 @@ public class Comunidade implements Serializable {
 	@Column(name = "foto_perfil_comunidade")
 	private Foto fotoPerfil;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "incidente", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Incidente> incidentes;
-	
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL)
-	private List<Usuario> usuarios;
+//	@JoinTable(name = "lista_incidente_na_comunidade", 
+//	joinColumns = @JoinColumn(name = "id_comunidade"), 
+//	inverseJoinColumns = @JoinColumn(name = "id_incidente"))
+//	private List<Incidente> incidentes;
+//	
+//	@JoinTable(name = "usuarios_membros_comunidades", 
+//	joinColumns = @JoinColumn(name = "id_comunidade"),
+//	inverseJoinColumns = @JoinColumn(name = "id_usuario"))
+//	private List<Usuario> usuarios;
 	
 	public Comunidade() {}
 	
-	public Comunidade(String nome, Localidade localidade, Foto fotoPerfil) {
+	public Comunidade(String nome, String descricao, Localidade localidade, Foto fotoPerfil) {
 		setNome(nome);
+		setDescricao(descricao);
 		setLocalidade(localidade);
 		setFotoPerfil(fotoPerfil); 
 	}
@@ -100,13 +104,13 @@ public class Comunidade implements Serializable {
 		this.fotoPerfil = fotoPerfil;
 	}
 	
-	public List<Incidente> getIncidente() {
-		return incidentes;
-	}
-	
-	public List<Usuario> getUsuario() {
-		return usuarios;
-	}
+//	public List<Incidente> getIncidente() {
+//		return incidentes;
+//	}
+//	
+//	public List<Usuario> getUsuario() {
+//		return usuarios;
+//	}
 
 	public int hashCode() {
 		return Objects.hash(id);

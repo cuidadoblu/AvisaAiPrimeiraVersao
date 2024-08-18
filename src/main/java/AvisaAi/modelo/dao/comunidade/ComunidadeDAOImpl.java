@@ -10,21 +10,16 @@ import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 
 import AvisaAi.modelo.entidade.comunidade.Comunidade;
+import AvisaAi.modelo.entidade.comunidade.Comunidade_;
 import AvisaAi.modelo.entidade.localidade.Localidade;
+import AvisaAi.modelo.entidade.localidade.Localidade_;
 import AvisaAi.modelo.factory.conexao.ConexaoFactory;
 
 public class ComunidadeDAOImpl implements ComunidadeDAO {
 	
-	private ConexaoFactory fabrica;
-	
-	public ComunidadeDAOImpl() {
-		fabrica = new ConexaoFactory();
-	}
+	private final SessionFactory fabrica = ConexaoFactory.getConexao();
 	
 	public void inserirComunidade(Comunidade comunidade) {
 	
@@ -32,7 +27,7 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 		
 		try {
 			
-			sessao = fabrica.getConexao().openSession();
+			sessao = fabrica.openSession();
 			sessao.beginTransaction();
 			
 			sessao.save(comunidade);
@@ -61,7 +56,7 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 		
 		try {
 			
-			sessao = fabrica.getConexao().openSession();
+			sessao = fabrica.openSession();
 			sessao.beginTransaction();
 			
 			sessao.remove(comunidade);
@@ -89,7 +84,7 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 		
 		try {
 			
-			sessao = fabrica.getConexao().openSession();
+			sessao = fabrica.openSession();
 			sessao.beginTransaction();
 			
 			sessao.update(comunidade);
@@ -118,7 +113,7 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 		
 		try {
 			
-			sessao = fabrica.getConexao().openSession();
+			sessao = fabrica.openSession();
 			sessao.beginTransaction();
 			
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();		
@@ -157,7 +152,7 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 		
 		try {
 			
-			sessao = fabrica.getConexao().openSession();
+			sessao = fabrica.openSession();
 			sessao.beginTransaction();
 			
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
@@ -165,10 +160,10 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 			CriteriaQuery<Comunidade> criteria = construtor.createQuery(Comunidade.class);
 			Root<Comunidade> raizComunidade = criteria.from(Comunidade.class);
 			
-//			Join<Comunidade, Localidade> juncaoLocalidade = raizComunidade.join(Comunidade_.localidade);
+			Join<Comunidade, Localidade> juncaoLocalidade = raizComunidade.join(Comunidade_.localidade);
 			
 			ParameterExpression<String> bairro = construtor.parameter(String.class);
-//			criteria.where(construtor.equal(juncaoLocalidade.get(Localidade_.bairro), bairro));
+			criteria.where(construtor.equal(juncaoLocalidade.get(Localidade_.bairro), bairro));
 			
 			comunidade = sessao.createQuery(criteria).setParameter(bairro, localidade.getBairro()).getSingleResult();
 			
