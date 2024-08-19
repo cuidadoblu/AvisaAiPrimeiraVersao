@@ -1,21 +1,20 @@
 package AvisaAi.modelo.dao.foto;
 
 import java.util.List;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import AvisaAi.modelo.entidade.foto.Foto;
 import AvisaAi.modelo.factory.conexao.ConexaoFactory;
 
 public class FotoDAOImpl implements FotoDAO {
 	
-	  private ConexaoFactory fabrica;
-	    
-	    public FotoDAOImpl() {
-	        this.fabrica = new ConexaoFactory();
-	    }
+		private final SessionFactory fabrica = ConexaoFactory.getConexao();
 	    
 	    public void inserirFoto(Foto foto) {
 	    	
@@ -23,7 +22,7 @@ public class FotoDAOImpl implements FotoDAO {
 	        
 	        try {
 	        	
-	        	sessao = fabrica.getConexao().openSession();
+	        	sessao = fabrica.openSession();
 	            sessao.beginTransaction();
 	            
 	            sessao.save(foto);
@@ -51,7 +50,7 @@ public class FotoDAOImpl implements FotoDAO {
 	        
 	        try {
 	        	
-	        	sessao = fabrica.getConexao().openSession();
+	        	sessao = fabrica.openSession();
 	            sessao.beginTransaction();
 	            
 	            sessao.remove(foto);
@@ -79,7 +78,7 @@ public class FotoDAOImpl implements FotoDAO {
 	        
 	        try {
 	        	
-	        	sessao = fabrica.getConexao().openSession();
+	        	sessao = fabrica.openSession();
 	            sessao.beginTransaction();
 	            
 	            sessao.update(foto);
@@ -108,7 +107,7 @@ public class FotoDAOImpl implements FotoDAO {
 	        
 	        try {
 	        	
-	        	sessao = fabrica.getConexao().openSession();
+	        	sessao = fabrica.openSession();
 	            sessao.beginTransaction();
 	            
 	            CriteriaBuilder construtor = sessao.getCriteriaBuilder();
@@ -144,7 +143,7 @@ public class FotoDAOImpl implements FotoDAO {
 	        
 	        try {
 	        	
-	            sessao = fabrica.getConexao().openSession();
+	            sessao = fabrica.openSession();
 	            sessao.beginTransaction();
 	            foto = sessao.get(Foto.class, id);
 	            sessao.getTransaction().commit();

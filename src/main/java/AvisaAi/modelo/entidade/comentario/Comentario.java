@@ -50,7 +50,7 @@ public class Comentario implements Serializable {
     @Column(name = "avaliacoes_comentario")
     private int avaliacoes;
 
-    @OneToMany(mappedBy = "comentarioPai", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "comentarioOrigem", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Resposta> respostas = new ArrayList<>();
 
     public Comentario() {}

@@ -8,6 +8,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import AvisaAi.modelo.entidade.localidade.Localidade;
 import AvisaAi.modelo.factory.conexao.ConexaoFactory;
@@ -15,11 +16,7 @@ import AvisaAi.modelo.factory.conexao.ConexaoFactory;
 
 public class LocalidadeDAOImpl implements LocalidadeDAO {
 	
-	private final ConexaoFactory conexaoFactory;
-
-	public LocalidadeDAOImpl() {
-		this.conexaoFactory = new ConexaoFactory();
-	}
+	private final SessionFactory fabrica = ConexaoFactory.getConexao();
 
 	@Override
 	public void inserirLocalidade(Localidade localidade) {
@@ -27,7 +24,7 @@ public class LocalidadeDAOImpl implements LocalidadeDAO {
 
 		try {
 
-			sessao = conexaoFactory.getConexao().openSession();
+			sessao = fabrica.openSession();
 			sessao.beginTransaction();
 
 			sessao.save(localidade);
@@ -57,7 +54,7 @@ public class LocalidadeDAOImpl implements LocalidadeDAO {
 
 		try {
 
-			sessao = conexaoFactory.getConexao().openSession();
+			sessao = fabrica.openSession();
 			sessao.beginTransaction();
 
 			sessao.remove(localidade);
@@ -83,7 +80,7 @@ public class LocalidadeDAOImpl implements LocalidadeDAO {
 	
 	@Override
     public List<Localidade> consultarLocalidadePorBairro(String bairro) {
-        EntityManager entityManager = conexaoFactory.getConexao().createEntityManager();
+        EntityManager entityManager = fabrica.createEntityManager();
         
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         
@@ -92,7 +89,7 @@ public class LocalidadeDAOImpl implements LocalidadeDAO {
         
         query.select(root).where(
             criteriaBuilder.and(
-                criteriaBuilder.equal(root.get(Localidade_.bairro))
+//                criteriaBuilder.equal(root.get(Localidade_.bairro))
             )
         );
         
@@ -103,7 +100,7 @@ public class LocalidadeDAOImpl implements LocalidadeDAO {
     
     @Override
     public List<Localidade> consultarLocalidadePorCidade(String cidade) {
-        EntityManager entityManager = conexaoFactory.getConexao().createEntityManager();
+        EntityManager entityManager = fabrica.createEntityManager();
         
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         
@@ -112,7 +109,7 @@ public class LocalidadeDAOImpl implements LocalidadeDAO {
         
         query.select(root).where(
             criteriaBuilder.and(
-                criteriaBuilder.equal(root.get(Localidade_.cidade))
+//                criteriaBuilder.equal(root.get(Localidade_.cidade))
             )
         );
         
@@ -123,7 +120,7 @@ public class LocalidadeDAOImpl implements LocalidadeDAO {
     
     @Override
     public List<Localidade> consultarLocalidadePorLogradouro(String logradouro) {
-        EntityManager entityManager = conexaoFactory.getConexao().createEntityManager();
+        EntityManager entityManager = fabrica.createEntityManager();
         
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         
@@ -132,7 +129,7 @@ public class LocalidadeDAOImpl implements LocalidadeDAO {
         
         query.select(root).where(
             criteriaBuilder.and(
-                criteriaBuilder.equal(root.get(Localidade_.logradouro))
+//                criteriaBuilder.equal(root.get(Localidade_.logradouro))
             )
         );
         
@@ -147,7 +144,7 @@ public class LocalidadeDAOImpl implements LocalidadeDAO {
 
 		try {
 
-			sessao = conexaoFactory.getConexao().openSession();
+			sessao = fabrica.openSession();
 			sessao.beginTransaction();
 
 			sessao.update(localidade);
@@ -177,7 +174,7 @@ public class LocalidadeDAOImpl implements LocalidadeDAO {
 
 		try {
 
-			sessao = conexaoFactory.getConexao().openSession();
+			sessao = fabrica.openSession();
 			sessao.beginTransaction();
 
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
