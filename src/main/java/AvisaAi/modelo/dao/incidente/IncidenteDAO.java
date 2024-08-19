@@ -6,8 +6,6 @@ import AvisaAi.modelo.entidade.comunidade.Comunidade;
 import AvisaAi.modelo.entidade.incidente.Incidente;
 import AvisaAi.modelo.entidade.localidade.Localidade;
 import AvisaAi.modelo.entidade.usuario.Usuario;
-import AvisaAi.modelo.enumeracao.categoria.Categoria;
-import AvisaAi.modelo.enumeracao.situacao.Situacao;
 
 public interface IncidenteDAO {
 	
@@ -17,14 +15,14 @@ public interface IncidenteDAO {
 	
 	void atualizarIncidente(Incidente incidente);
 	
-	List<Incidente> consultarIncidenteComunidade(Comunidade comunidade);
+	List<Incidente> consultarIncidentesComunidade(Comunidade comunidade);
 	
-	List<Incidente> consultarIncidenteCategoria(Categoria categoria);
+	List<Incidente> consultarIncidentesCategoria(Incidente incidente);
 	
-	List<Incidente> consultarIncidenteUsuarioPorData(Usuario usuario, Incidente incidente);
+	List<Incidente> consultarIncidentesUsuarioPorData(Usuario usuario, Incidente incidente);
 	
-	List<Incidente> consultarIncidenteLogradouroPorData(Localidade localidade, Incidente incidente);
+	List<Incidente> consultarIncidentesLogradouroPorData(Localidade localidade, Incidente incidente);
 	
-	List<Incidente> consultarIncidenteSituacao(Situacao situacao);	
+	List<Incidente> consultarIncidentesSituacao(Incidente incidente);	
 
 }

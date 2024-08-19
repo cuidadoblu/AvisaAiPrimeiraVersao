@@ -35,9 +35,7 @@ public class Usuario implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_usuario")
-	@JoinTable(name = "usuarios_membros_comunidades", 
-	joinColumns = @JoinColumn(name = "id_usuario"), 
-	inverseJoinColumns = @JoinColumn(name = "id_comunidade"))
+	@JoinColumn(name = "id_comunidade", referencedColumnName = "id_comunidade")
 	private Long id;
 	
 	@OneToOne(cascade = CascadeType.ALL)
@@ -57,9 +55,9 @@ public class Usuario implements Serializable {
     @JoinColumn(name = "id_contato", referencedColumnName = "id_contato")
 	private Contato contato;
 	
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuarios", cascade = CascadeType.ALL, orphanRemoval = true)
-//	private List<Comunidade> comunidadesAcompanhadas;
-//	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuarios", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Comunidade> comunidadesAcompanhadas;
+	
 //	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
 //	private List<Comentario> comentariosFeitos;
 //	

@@ -15,7 +15,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -36,9 +35,7 @@ public class Incidente implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_incidente")
-	@JoinTable(name = "lista_incidente_na_comunidade", 
-	joinColumns = @JoinColumn(name = "id_incidente"), 
-	inverseJoinColumns = @JoinColumn(name = "id_comunidade"))
+	@JoinColumn(name = "id_comunidade", referencedColumnName = "id_comunidade")
 	private Long id;
 	
 	@Column(name = "titulo_incidente", length = 100, nullable = false)
