@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import AvisaAi.modelo.entidade.comentario.Comentario;
 import AvisaAi.modelo.entidade.comunidade.Comunidade;
 import AvisaAi.modelo.entidade.foto.Foto;
 import AvisaAi.modelo.entidade.usuario.contato.Contato;
@@ -35,7 +36,6 @@ public class Usuario implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_usuario")
-	@JoinColumn(name = "id_comunidade", referencedColumnName = "id_comunidade")
 	private Long id;
 	
 	@OneToOne(cascade = CascadeType.ALL)
@@ -55,12 +55,13 @@ public class Usuario implements Serializable {
     @JoinColumn(name = "id_contato", referencedColumnName = "id_contato")
 	private Contato contato;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuarios", cascade = CascadeType.ALL, orphanRemoval = true)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_comunidade", referencedColumnName = "id_comunidade")
 	private List<Comunidade> comunidadesAcompanhadas;
 	
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-//	private List<Comentario> comentariosFeitos;
-//	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL)
+	private List<Comentario> comentariosFeitos;
+	
 //	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
 //	private List<Incidente> incidentesCadastrados;
 //	

@@ -62,9 +62,9 @@ public class Principal {
 		Incidente incidente1 = new Incidente("Alagamento na Beira Rio", "Beira Rio em baixo d'água", LocalDateTime.now(), Categoria.ALAGAMENTO, comunidade1, usuario1, localidade1, Situacao.ATIVO, null);
 		incidenteDAO.inserirIncidente(incidente1);
 		
-//		Comentario comentario1Incidente1 = new Comentario("A água já está baixando", LocalDateTime.now(), usuario1, incidente1);
-//		comentarioDAO.inserirComentario(comentario1Incidente1);
-//		
+		Comentario comentario1Incidente1 = new Comentario("A água já está baixando", LocalDateTime.now(), usuario1, incidente1);
+		comentarioDAO.inserirComentario(comentario1Incidente1);
+		
 //		Resposta respostaComentario1Incidente1 = new Resposta("A água na verdade está mais alta que antes", LocalDateTime.now(), usuario1, comentario1Incidente1);
 //		respostaDAO.inserirResposta(respostaComentario1Incidente1);
 		

@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -45,10 +46,10 @@ public class Comunidade implements Serializable {
 	@Column(name = "foto_perfil_comunidade")
 	private Foto fotoPerfil;
 	
-	@OneToMany(mappedBy = "id")
+	@OneToMany(mappedBy = "comunidade")
 	private List<Incidente> incidentes;
 	
-	@OneToMany(mappedBy = "id")
+	@ManyToMany(mappedBy = "comunidadesAcompanhadas")
 	private List<Usuario> usuarios;
 	
 	public Comunidade() {}

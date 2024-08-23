@@ -35,7 +35,6 @@ public class Incidente implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_incidente")
-	@JoinColumn(name = "id_comunidade", referencedColumnName = "id_comunidade")
 	private Long id;
 	
 	@Column(name = "titulo_incidente", length = 100, nullable = false)
@@ -67,8 +66,8 @@ public class Incidente implements Serializable{
 	@Enumerated(EnumType.STRING)
 	private Situacao situacao;
 	
-//	@Column(name = "foto_incidente")
-//	private List<Foto> fotoIncidente;
+	@Column(name = "foto_incidente")
+	private List<Foto> fotoIncidente;
 	
 	public Incidente() {}
 	
@@ -81,7 +80,7 @@ public class Incidente implements Serializable{
 		setUsuario(usuario);
 		setLocalidade(localidade);
 		setSituacao(situacao);
-//		setFotoIncidente(fotoIncidente);
+		setFotoIncidente(fotoIncidente);
 	}
 	
 	public Long getId() {
@@ -156,13 +155,13 @@ public class Incidente implements Serializable{
 		this.situacao = situacao;
 	}
 	
-//	public List<Foto> getFotoIncidente() {
-//		return fotoIncidente;
-//	}
-//	
-//	public void setFotoIncidente(List<Foto> fotoIncidente) {
-//		this.fotoIncidente = fotoIncidente;
-//	}
+	public List<Foto> getFotoIncidente() {
+		return fotoIncidente;
+	}
+	
+	public void setFotoIncidente(List<Foto> fotoIncidente) {
+		this.fotoIncidente = fotoIncidente;
+	}
 	
 	public int hashCode() {
 		return Objects.hash(id);
