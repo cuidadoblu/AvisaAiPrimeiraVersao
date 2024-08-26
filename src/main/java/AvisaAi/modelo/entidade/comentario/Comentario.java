@@ -40,7 +40,7 @@ public class Comentario implements Serializable {
     private LocalDateTime dataHora;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "id_comentario", referencedColumnName = "id_comentario")
+    @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -39,17 +39,17 @@ public class Comunidade implements Serializable {
 	@Column(name = "descricao_comunidade", length = 950)
 	private String descricao;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_localidade", referencedColumnName = "id_localidade")
 	private Localidade localidade;
 	
 	@Column(name = "foto_perfil_comunidade")
 	private Foto fotoPerfil;
 	
-	@OneToMany(mappedBy = "comunidade")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "comunidade", cascade = CascadeType.DETACH)
 	private List<Incidente> incidentes;
 	
-	@ManyToMany(mappedBy = "comunidadesAcompanhadas")
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "comunidadesAcompanhadas", cascade = CascadeType.DETACH)
 	private List<Usuario> usuarios;
 	
 	public Comunidade() {}

@@ -16,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import AvisaAi.modelo.entidade.comunidade.Comunidade;
@@ -66,7 +67,7 @@ public class Incidente implements Serializable{
 	@Enumerated(EnumType.STRING)
 	private Situacao situacao;
 	
-	@Column(name = "foto_incidente")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "id", cascade = CascadeType.REMOVE)
 	private List<Foto> fotoIncidente;
 	
 	public Incidente() {}

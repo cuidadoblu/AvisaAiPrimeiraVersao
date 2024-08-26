@@ -65,8 +65,8 @@ public class Principal {
 		Comentario comentario1Incidente1 = new Comentario("A água já está baixando", LocalDateTime.now(), usuario1, incidente1);
 		comentarioDAO.inserirComentario(comentario1Incidente1);
 		
-//		Resposta respostaComentario1Incidente1 = new Resposta("A água na verdade está mais alta que antes", LocalDateTime.now(), usuario1, comentario1Incidente1);
-//		respostaDAO.inserirResposta(respostaComentario1Incidente1);
+		Resposta respostaComentario1Incidente1 = new Resposta("A água na verdade está mais alta que antes", LocalDateTime.now(), usuario1, comentario1Incidente1);
+		respostaDAO.inserirResposta(respostaComentario1Incidente1);
 		
 	}
 
