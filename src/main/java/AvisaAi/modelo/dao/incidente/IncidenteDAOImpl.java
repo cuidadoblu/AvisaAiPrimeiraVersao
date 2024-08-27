@@ -12,6 +12,8 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import AvisaAi.modelo.entidade.comentario.Comentario;
+import AvisaAi.modelo.entidade.comentario.Comentario_;
 import AvisaAi.modelo.entidade.comunidade.Comunidade;
 import AvisaAi.modelo.entidade.comunidade.Comunidade_;
 import AvisaAi.modelo.entidade.incidente.Incidente;
@@ -121,6 +123,47 @@ public class IncidenteDAOImpl implements IncidenteDAO{
 		
 	}
 
+	public List<Comentario> consultarComentariosIncidente(Incidente incidente) {
+		
+		Session sessao = null;
+		List<Comentario> comentarios = null;
+		
+		try {
+			sessao = fabrica.openSession();
+			sessao.beginTransaction();
+			
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			
+			CriteriaQuery<Comentario> criteria = construtor.createQuery(Comentario.class);
+			Root<Comentario> raizComentario = criteria.from(Comentario.class);
+			
+			criteria.select(raizComentario);
+			
+			Join<Comentario, Incidente> juncaoIncidente = raizComentario.join(Comentario_.incidente);
+			
+			ParameterExpression<Long> idIncidente = construtor.parameter(Long.class);
+			criteria.where(construtor.equal(juncaoIncidente.get(Incidente_.id), idIncidente));
+			
+			comentarios = sessao.createQuery(criteria).setParameter(idIncidente, incidente.getId()).getResultList();
+			
+			sessao.getTransaction().commit();
+			
+		} catch(Exception sqlException) {
+			
+			sqlException.printStackTrace();
+			
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+		} finally {
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+		
+		return comentarios;
+	}
+	
 	public List<Incidente> consultarIncidentesComunidade(Comunidade comunidade) {
 		
 		Session sessao = null;
@@ -258,7 +301,7 @@ public class IncidenteDAOImpl implements IncidenteDAO{
 
 	}
 
-	public List<Incidente> consultarIncidentesLogradouroPorData(Localidade localidade, Incidente incidente) {
+	public List<Incidente> consultarIncidentesLocalidadePorData(Localidade localidade, Incidente incidente) {
 		
 		Session sessao = null;
 		List<Incidente> incidentes = null;
@@ -277,11 +320,11 @@ public class IncidenteDAOImpl implements IncidenteDAO{
 			
 			Join<Incidente, Localidade> juncaoLocalidade = raizIncidente.join(Incidente_.localidade);
 			
-			Predicate predicadoLogradouroLocalidade = construtor.equal(juncaoLocalidade.get(Localidade_.logradouro), localidade.getLogradouro());
+			Predicate predicadoIncidentesLocalidade = construtor.equal(juncaoLocalidade.get(Localidade_.incidentes), localidade.getLogradouro());
 			
 			Predicate predicadoDataHoraIncidente = construtor.equal(raizIncidente.get(Incidente_.dataHora), incidente.getDataHora());
 			
-			Predicate predicadoResultado = construtor.and(predicadoLogradouroLocalidade, predicadoDataHoraIncidente);
+			Predicate predicadoResultado = construtor.and(predicadoIncidentesLocalidade, predicadoDataHoraIncidente);
 			criteria.where(predicadoResultado);
 			
 			incidentes = sessao.createQuery(criteria).getResultList();

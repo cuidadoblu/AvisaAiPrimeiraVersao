@@ -2,6 +2,7 @@ package AvisaAi.modelo.dao.incidente;
 
 import java.util.List;
 
+import AvisaAi.modelo.entidade.comentario.Comentario;
 import AvisaAi.modelo.entidade.comunidade.Comunidade;
 import AvisaAi.modelo.entidade.incidente.Incidente;
 import AvisaAi.modelo.entidade.localidade.Localidade;
@@ -15,13 +16,15 @@ public interface IncidenteDAO {
 	
 	void atualizarIncidente(Incidente incidente);
 	
+	List<Comentario> consultarComentariosIncidente(Incidente incidente);
+	
 	List<Incidente> consultarIncidentesComunidade(Comunidade comunidade);
 	
 	List<Incidente> consultarIncidentesCategoria(Incidente incidente);
 	
 	List<Incidente> consultarIncidentesUsuarioPorData(Usuario usuario, Incidente incidente);
 	
-	List<Incidente> consultarIncidentesLogradouroPorData(Localidade localidade, Incidente incidente);
+	List<Incidente> consultarIncidentesLocalidadePorData(Localidade localidade, Incidente incidente);
 	
 	List<Incidente> consultarIncidentesSituacao(Incidente incidente);	
 
