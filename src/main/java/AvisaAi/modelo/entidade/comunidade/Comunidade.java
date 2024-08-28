@@ -12,7 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -38,22 +39,18 @@ public class Comunidade implements Serializable {
 	@Column(name = "descricao_comunidade", length = 950)
 	private String descricao;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_localidade", referencedColumnName = "id_localidade")
 	private Localidade localidade;
 	
 	@Column(name = "foto_perfil_comunidade")
 	private Foto fotoPerfil;
 	
-//	@JoinTable(name = "lista_incidente_na_comunidade", 
-//	joinColumns = @JoinColumn(name = "id_comunidade"), 
-//	inverseJoinColumns = @JoinColumn(name = "id_incidente"))
-//	private List<Incidente> incidentes;
-//	
-//	@JoinTable(name = "usuarios_membros_comunidades", 
-//	joinColumns = @JoinColumn(name = "id_comunidade"),
-//	inverseJoinColumns = @JoinColumn(name = "id_usuario"))
-//	private List<Usuario> usuarios;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "comunidade", cascade = CascadeType.DETACH)
+	private List<Incidente> incidentes;
+	
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "comunidadesAcompanhadas", cascade = CascadeType.DETACH)
+	private List<Usuario> usuarios;
 	
 	public Comunidade() {}
 	

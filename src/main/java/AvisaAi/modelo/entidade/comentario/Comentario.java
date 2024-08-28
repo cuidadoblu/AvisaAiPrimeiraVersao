@@ -18,9 +18,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import AvisaAi.modelo.entidade.usuario.Usuario;
-import AvisaAi.modelo.entidade.incidente.Incidente;
 import AvisaAi.modelo.entidade.comentario.resposta.Resposta;
+import AvisaAi.modelo.entidade.incidente.Incidente;
+import AvisaAi.modelo.entidade.usuario.Usuario;
 
 @Entity
 @Table(name = "comentario")
@@ -39,7 +39,7 @@ public class Comentario implements Serializable {
     @Column(name = "data_hora_comentario", nullable = false)
     private LocalDateTime dataHora;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
@@ -50,7 +50,7 @@ public class Comentario implements Serializable {
     @Column(name = "avaliacoes_comentario")
     private int avaliacoes;
 
-    @OneToMany(mappedBy = "comentarioOrigem", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "comentarioOrigem", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Resposta> respostas = new ArrayList<>();
 
     public Comentario() {}
