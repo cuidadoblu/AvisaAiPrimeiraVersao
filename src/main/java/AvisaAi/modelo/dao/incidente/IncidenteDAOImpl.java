@@ -123,7 +123,7 @@ public class IncidenteDAOImpl implements IncidenteDAO{
 		
 	}
 
-	public List<Comentario> consultarComentariosIncidente(Incidente incidente) {
+	public List<Comentario> consultarQuantidadeComentariosIncidente(Incidente incidente) {
 		
 		Session sessao = null;
 		List<Comentario> comentarios = null;
