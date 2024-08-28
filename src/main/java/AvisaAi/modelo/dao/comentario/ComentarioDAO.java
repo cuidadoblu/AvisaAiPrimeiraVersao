@@ -3,6 +3,7 @@ package AvisaAi.modelo.dao.comentario;
 import java.util.List;
 
 import AvisaAi.modelo.entidade.comentario.Comentario;
+import AvisaAi.modelo.entidade.comentario.resposta.Resposta;
 import AvisaAi.modelo.entidade.incidente.Incidente;
 import AvisaAi.modelo.entidade.usuario.Usuario;
 
@@ -19,6 +20,8 @@ public interface ComentarioDAO {
 	List<Comentario> consultarComentarioIncidente(Incidente incidente);
 	
 	List<Comentario> consultarComentarioUsuario(Usuario usuario);
+	
+	List<Resposta> consultarQuantidadeRespostasComentario(Comentario comentario);
 	
 	Comentario consultarComentarioId(String id);
 }

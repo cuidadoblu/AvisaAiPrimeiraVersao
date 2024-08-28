@@ -5,12 +5,16 @@ import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
+import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import AvisaAi.modelo.entidade.comentario.Comentario;
+import AvisaAi.modelo.entidade.comentario.Comentario_;
+import AvisaAi.modelo.entidade.comentario.resposta.Resposta;
+import AvisaAi.modelo.entidade.comentario.resposta.Resposta_;
 import AvisaAi.modelo.entidade.incidente.Incidente;
 import AvisaAi.modelo.entidade.usuario.Usuario;
 import AvisaAi.modelo.factory.conexao.ConexaoFactory;
@@ -240,4 +244,48 @@ public class ComentarioDAOImpl implements ComentarioDAO {
         }
         return comentario;
     }
+
+	@Override
+	public List<Resposta> consultarQuantidadeRespostasComentario(Comentario comentario) {
+		
+		Session sessao = null;
+		List<Resposta> respostas = null;
+		
+		try {
+			
+			sessao = fabrica.openSession();
+			sessao.beginTransaction();
+			
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			
+			CriteriaQuery<Resposta> criteria = construtor.createQuery(Resposta.class);
+			Root<Resposta> raizResposta = criteria.from(Resposta.class);
+			
+			criteria.select(raizResposta);
+			
+			Join<Resposta, Comentario> juncaoComentario = raizResposta.join(Resposta_.comentarioOrigem);
+			
+			ParameterExpression<Long> idComentario = construtor.parameter(Long.class);
+			criteria.where(construtor.equal(juncaoComentario.get(Comentario_.id), idComentario));
+			
+			respostas = sessao.createQuery(criteria).setParameter(idComentario, comentario.getId()).getResultList();
+			
+			sessao.getTransaction().commit();
+			
+		} catch (Exception sqlException) {
+        	
+            sqlException.printStackTrace();
+            
+            if (sessao.getTransaction() != null) {
+                sessao.getTransaction().rollback();
+            }
+        } finally {
+        	
+            if (sessao != null) {
+                sessao.close();
+            }
+        }
+		
+		return respostas;
+	}
 }
