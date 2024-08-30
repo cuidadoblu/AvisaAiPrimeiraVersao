@@ -47,7 +47,7 @@ public class Localidade implements Serializable {
 	private String complemento;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "localidade", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Incidente> incidentes;
+	private List<Incidente> incidentes = new ArrayList<Incidente>();
 	
 	public Localidade () {
 		

@@ -57,17 +57,19 @@ public class Usuario implements Serializable {
 	private Contato contato;
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_comunidade", referencedColumnName = "id_comunidade")
-	private List<Comunidade> comunidadesAcompanhadas;
+	@JoinTable(name = "usuarios_membros_comunidades", 
+	joinColumns = @JoinColumn (name = "id_usuario"), 
+	inverseJoinColumns = @JoinColumn (name = "id_comunidade"))
+	private List<Comunidade> comunidadesAcompanhadas = new ArrayList<Comunidade>();
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Comentario> comentariosFeitos;
+	private List<Comentario> comentariosFeitos = new ArrayList<Comentario>();
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Incidente> incidentesCadastrados;
+	private List<Incidente> incidentesCadastrados = new ArrayList<Incidente>();
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Incidente> incidentesAcompanhados;
+	private List<Incidente> incidentesAcompanhados = new ArrayList<Incidente>();
 	
 	@ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(

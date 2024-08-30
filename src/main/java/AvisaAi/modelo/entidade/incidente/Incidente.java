@@ -2,6 +2,7 @@ package AvisaAi.modelo.entidade.incidente;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -68,7 +69,7 @@ public class Incidente implements Serializable{
 	private Situacao situacao;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "id", cascade = CascadeType.REMOVE)
-	private List<Foto> fotoIncidente;
+	private List<Foto> fotoIncidente = new ArrayList<Foto>();
 	
 	public Incidente() {}
 	

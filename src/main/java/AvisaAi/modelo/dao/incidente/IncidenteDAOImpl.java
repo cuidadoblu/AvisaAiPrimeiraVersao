@@ -227,7 +227,7 @@ public class IncidenteDAOImpl implements IncidenteDAO{
 			
 			Join<Incidente, Categoria> juncaoCategoria = raizIncidente.join(Incidente_.categoria);
 			
-			Predicate predicadoCategoriaIncidente = construtor.equal(juncaoCategoria.get(Incidente_.categoria), incidente.getCategoria());
+			Predicate predicadoCategoriaIncidente = construtor.equal(juncaoCategoria.get(Incidente_.categoria.getName()), incidente.getCategoria());
 			
 			criteria.where(predicadoCategoriaIncidente);
 			
@@ -368,7 +368,7 @@ public class IncidenteDAOImpl implements IncidenteDAO{
 			
 			Join<Incidente, Situacao> juncaoSituacao = raizIncidente.join(Incidente_.situacao);
 			
-			Predicate predicadoSituacaoIncidente = construtor.equal(juncaoSituacao.get(Incidente_.situacao), incidente.getSituacao());
+			Predicate predicadoSituacaoIncidente = construtor.equal(juncaoSituacao.get(Incidente_.situacao.getName()), incidente.getSituacao());
 			
 			criteria.where(predicadoSituacaoIncidente);
 			
