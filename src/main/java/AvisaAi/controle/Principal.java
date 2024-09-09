@@ -68,7 +68,7 @@ public class Principal {
 		Resposta respostaComentario1Incidente1 = new Resposta("A água na verdade está mais alta que antes", LocalDateTime.now(), usuario1, comentario1Incidente1);
 		respostaDAO.inserirResposta(respostaComentario1Incidente1);
 		
-		incidenteDAO.consultarIncidentesComunidade(comunidade1).forEach(u -> System.out.println(u.getId()));
+//		incidenteDAO.consultarQuantidadeComentariosIncidente(incidente1).forEach(u -> System.out.println(u.getId()));
 		
 	}
 

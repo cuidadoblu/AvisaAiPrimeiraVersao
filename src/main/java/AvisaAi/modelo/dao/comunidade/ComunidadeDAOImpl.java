@@ -11,10 +11,15 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import AvisaAi.modelo.entidade.comentario.Comentario;
+import AvisaAi.modelo.entidade.comentario.Comentario_;
 import AvisaAi.modelo.entidade.comunidade.Comunidade;
 import AvisaAi.modelo.entidade.comunidade.Comunidade_;
+import AvisaAi.modelo.entidade.incidente.Incidente;
 import AvisaAi.modelo.entidade.localidade.Localidade;
 import AvisaAi.modelo.entidade.localidade.Localidade_;
+import AvisaAi.modelo.entidade.usuario.Usuario;
+import AvisaAi.modelo.entidade.usuario.Usuario_;
 import AvisaAi.modelo.factory.conexao.ConexaoFactory;
 
 public class ComunidadeDAOImpl implements ComunidadeDAO {
@@ -183,5 +188,47 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 			}
 		}
 		return comunidade;
+	}
+	
+	public List<Usuario> consultarQuantidadeUsuariosComunidade(Comunidade comunidade) {
+		
+		Session sessao = null;
+		List<Usuario> usuarios = null;
+		
+//		try {
+//			
+//			sessao = fabrica.openSession();
+//			sessao.beginTransaction();
+//			
+//			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+//			
+//			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
+//			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
+//			
+//			criteria.select(raizUsuario);
+//			
+//			Join<Usuario, Comunidade> juncaoComunidade = raizUsuario.join(Usuario_.id);
+//			
+//			ParameterExpression<Long> idComunidade = construtor.parameter(Long.class);
+//			criteria.where(construtor.equal(juncaoComunidade.get(Comunidade_.id), idComunidade));
+//			
+//			usuarios = sessao.createQuery(criteria)comunidade.setParameter(idComunidade, comunidade.getId()).getResultList();
+//			
+//			sessao.getTransaction().commit();
+//			
+//		} catch(Exception sqlException) {
+//			
+//			sqlException.printStackTrace();
+//			
+//			if (sessao.getTransaction() != null) {
+//				sessao.getTransaction().rollback();
+//			}
+//		} finally {
+//			if (sessao != null) {
+//				sessao.close();
+//			}
+//		}
+		
+		return usuarios;
 	}
 }
