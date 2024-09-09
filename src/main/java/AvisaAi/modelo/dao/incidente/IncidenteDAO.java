@@ -16,7 +16,7 @@ public interface IncidenteDAO {
 	
 	void atualizarIncidente(Incidente incidente);
 	
-	List<Comentario> consultarComentariosIncidente(Incidente incidente);
+	List<Comentario> consultarQuantidadeComentariosIncidente(Incidente incidente);
 	
 	List<Incidente> consultarIncidentesComunidade(Comunidade comunidade);
 	
@@ -25,6 +25,8 @@ public interface IncidenteDAO {
 	List<Incidente> consultarIncidentesUsuarioPorData(Usuario usuario, Incidente incidente);
 	
 	List<Incidente> consultarIncidentesLocalidadePorData(Localidade localidade, Incidente incidente);
+	
+	List<Incidente> consultarIncidentesLocalidade(Localidade localidade, Incidente incidente);
 	
 	List<Incidente> consultarIncidentesSituacao(Incidente incidente);	
 

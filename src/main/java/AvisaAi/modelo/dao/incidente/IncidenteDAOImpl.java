@@ -123,7 +123,7 @@ public class IncidenteDAOImpl implements IncidenteDAO{
 		
 	}
 
-	public List<Comentario> consultarComentariosIncidente(Incidente incidente) {
+	public List<Comentario> consultarQuantidadeComentariosIncidente(Incidente incidente) {
 		
 		Session sessao = null;
 		List<Comentario> comentarios = null;
@@ -320,7 +320,7 @@ public class IncidenteDAOImpl implements IncidenteDAO{
 			
 			Join<Incidente, Localidade> juncaoLocalidade = raizIncidente.join(Incidente_.localidade);
 			
-			Predicate predicadoIncidentesLocalidade = construtor.equal(juncaoLocalidade.get(Localidade_.incidentes), localidade.getLogradouro());
+			Predicate predicadoIncidentesLocalidade = construtor.equal(juncaoLocalidade.get(Localidade_.incidentes), localidade.getId());
 			
 			Predicate predicadoDataHoraIncidente = construtor.equal(raizIncidente.get(Incidente_.dataHora), incidente.getDataHora());
 			
@@ -392,6 +392,50 @@ public class IncidenteDAOImpl implements IncidenteDAO{
 		
 		return incidentes;
 
+	}
+	
+public List<Incidente> consultarIncidentesLocalidade(Localidade localidade, Incidente incidente) {
+		
+		Session sessao = null;
+		List<Incidente> incidentes = null;
+		
+		try {
+			
+			sessao = fabrica.openSession();
+			sessao.beginTransaction();
+			
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			
+			CriteriaQuery<Incidente> criteria = construtor.createQuery(Incidente.class);
+			Root<Incidente> raizIncidente = criteria.from(Incidente.class);
+			
+			criteria.select(raizIncidente);
+			
+			Join<Incidente, Localidade> juncaoLocalidade = raizIncidente.join(Incidente_.localidade);
+			
+			ParameterExpression<String> idLocalidade = construtor.parameter(String.class);
+	        criteria.where(construtor.equal(juncaoLocalidade.get(Localidade_.id), idLocalidade));
+			
+			incidentes = sessao.createQuery(criteria).getResultList();
+			
+			sessao.getTransaction().commit();
+			
+		} catch(Exception sqlException) {
+			
+			sqlException.printStackTrace();
+			
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+		} finally {
+			
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+		
+		return incidentes;
+		
 	}
 
 }
