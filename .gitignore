@@ -1,6 +1,6 @@
-/target/
-/.git/
-/.setting/
-/.project
-/.classpath
-/.apt_generated_tests/
+target/
+.git/
+.setting/
+.project
+.classpath
+.apt_generated_tests/
